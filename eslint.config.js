@@ -6,7 +6,15 @@ import prettierConfig from "eslint-config-prettier";
 
 export default [
   {
-    ignores: ["node_modules/", "dist/", "build/", ".env", "*.config.js", "migrations/", "seeders/"],
+    ignores: [
+      "node_modules/",
+      "dist/",
+      "build/",
+      ".env",
+      "*.config.js",
+      "src/migrations/",
+      "src/seeders/",
+    ],
   },
   eslint.configs.recommended,
   {
