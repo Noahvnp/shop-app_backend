@@ -1,14 +1,14 @@
 import { errorResponse } from "./apiResponse.js";
 
 export const errorHandler = (err, req, res, next) => {
-  /* eslint-disable no-console */
-  console.error(`[ERROR] ${err.status || 500} - ${err.message}`);
+  const isDev = process.env.NODE_ENV === "development";
 
   return errorResponse(
     res,
     err.status || 500,
     err.message || "Lỗi không xác định",
     err.code || "SERVER_ERROR",
+    isDev ? err.stack : undefined,
   );
 };
 

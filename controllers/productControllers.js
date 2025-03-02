@@ -1,12 +1,9 @@
-import { successResponse, errorResponse } from "../middlewares/apiResponse.js";
+import { successResponse } from "../middlewares/apiResponse.js";
+import asyncHandler from "../middlewares/asyncHandler.js";
 
-export const getProducts = async (req, res) => {
-  try {
-    return successResponse(res, "Lấy danh sách sản phẩm thành công");
-  } catch (error) {
-    return errorResponse(res, 500, "Lỗi server", "INTERNAL_SERVER_ERROR");
-  }
-};
+export const getProducts = asyncHandler(async (req, res) => {
+  return successResponse(res, "Lấy danh sách sản phẩm thành công");
+});
 
 export const getProductById = async (req, res) => {
   try {
