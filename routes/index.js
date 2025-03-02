@@ -1,13 +1,13 @@
 import "dotenv/config";
-import productRoutes from "./productRoutes";
-import categoryRoutes from "./categoryRoutes";
-import orderRoutes from "./orderRoutes";
-import orderDetailsRoutes from "./orderDetailsRoutes";
-import brandRoutes from "./brandRoutes";
+import brandRoutes from "./brandRoutes.js";
+import categoryRoutes from "./categoryRoutes.js";
+import orderDetailsRoutes from "./orderDetailsRoutes.js";
+import orderRoutes from "./orderRoutes.js";
+import productRoutes from "./productRoutes.js";
 
 const API_PREFIX = process.env.API_PREFIX || "/api";
 
-const initRoutes = (app) => {
+const initRoutes = app => {
   const routes = [
     { path: "/products", route: productRoutes },
     { path: "/categories", route: categoryRoutes },
@@ -20,9 +20,7 @@ const initRoutes = (app) => {
     app.use(`${API_PREFIX}${path}`, route);
   });
 
-  app.get("/", (_, res) =>
-    res.status(200).json({ message: "Shop app is running..." })
-  );
+  app.get("/", (_, res) => res.status(200).json({ message: "Shop app is running..." }));
 
   return app;
 };

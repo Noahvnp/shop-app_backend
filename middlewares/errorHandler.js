@@ -1,4 +1,5 @@
 export const errorHandler = (err, req, res, next) => {
+  /* eslint-disable no-console */
   console.error(`[ERROR] ${err.status || 500} - ${err.message}`);
 
   res.status(err.status || 500).json({
