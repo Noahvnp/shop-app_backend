@@ -1,20 +1,16 @@
+import { successResponse, errorResponse } from "../middlewares/apiResponse.js";
+
 export const getProducts = async (req, res) => {
   try {
-    return res
-      .status(200)
-      .json({ message: "Lấy danh sách sản phẩm thành công" });
+    return successResponse(res, "Lấy danh sách sản phẩm thành công");
   } catch (error) {
-    return res.status(500).json({
-      message: "Lỗi khi lấy danh sách sản phẩm: " + error,
-    });
+    return errorResponse(res, 500, "Lỗi server", "INTERNAL_SERVER_ERROR");
   }
 };
 
 export const getProductById = async (req, res) => {
   try {
-    return res
-      .status(200)
-      .json({ message: "Lấy thông tin sản phẩm thành công" });
+    return res.status(200).json({ message: "Lấy thông tin sản phẩm thành công" });
   } catch (error) {
     return res.status(500).json({
       message: "Lỗi khi lấy thông tin sản phẩm: " + error,
