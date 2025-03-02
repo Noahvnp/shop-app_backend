@@ -1,7 +1,7 @@
 import "dotenv/config";
 import { afterAll, describe, expect, it } from "@jest/globals";
 import request from "supertest";
-import server from "../../index";
+import server from "../../src/server.js";
 
 const API_PREFIX = process.env.API_PREFIX || "/api/v1";
 
