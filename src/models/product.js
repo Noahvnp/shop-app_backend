@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "product_id",
       });
 
-      Product.hasMany(models.NewsDeitail, {
+      Product.hasMany(models.NewsDetail, {
         foreignKey: "product_id",
       });
     }
@@ -51,7 +51,7 @@ module.exports = (sequelize, DataTypes) => {
       modelName: "Product",
       tableName: "products",
       underscored: true,
-    }
+    },
   );
   return Product;
 };
