@@ -12,6 +12,11 @@ npx sequelize-cli db:migrate:undo
 
 npx sequelize-cli db:migrate:undo:all
 
+# Run seeders
+npx sequelize-cli db:seed:all
+
+npx sequelize db:seed:undo:all
+
 # Models
 npx sequelize-cli model:generate --name User --attributes email:string,password:string,name:string,role:integer,avatar:string,phone:integer
 
