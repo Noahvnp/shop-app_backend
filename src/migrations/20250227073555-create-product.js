@@ -10,6 +10,8 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       name: {
+        allowNull: false,
+        unique: true,
         type: Sequelize.STRING,
       },
       price: {
@@ -29,9 +31,11 @@ module.exports = {
       },
       buyturn: {
         type: Sequelize.INTEGER,
+        defaultValue: 0,
       },
       quantity: {
         type: Sequelize.INTEGER,
+        defaultValue: 0,
       },
       brand_id: {
         type: Sequelize.INTEGER,
