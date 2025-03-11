@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "316f7284-6a1b-4ed2-8037-6cb9c5b56c7a",
+		"_postman_id": "0bac6cf7-4863-427d-9023-be7e9ae48611",
 		"name": "ShopApp",
 		"description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Scripts\" tab**\n\nAdding tests to your requests can help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/fa30ea0a-373d-4545-a668-e7b283cca343/aW1hZ2UucG5n\" alt=\"\" height=\"1530\" width=\"2162\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n    \n- Add more [scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/) to verify if the API works as expected and execute workflows.\n    \n\n## 💡Related templates\n\n[API testing basics](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9a37a28-055b-49cd-8c7e-97494a21eb54&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[API documentation](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9c28f47-1253-44af-a2f3-20dce4da1f18&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[Authorization methods](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=31a9a6ed-4cdf-4ced-984c-d12c9aec1c27&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
@@ -30,13 +30,58 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/products/",
+							"raw": "{{base_url}}/products?search=samsung",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"products",
-								""
+								"products"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "samsung"
+								},
+								{
+									"key": "page",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "category_id",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "brand_id",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "min_price",
+									"value": "26990000",
+									"disabled": true
+								},
+								{
+									"key": "max_price",
+									"value": "34990000",
+									"disabled": true
+								},
+								{
+									"key": "sort_by",
+									"value": "price",
+									"disabled": true
+								},
+								{
+									"key": "order_type",
+									"value": "ASC",
+									"disabled": true
+								}
 							]
 						},
 						"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
@@ -63,13 +108,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/products/1",
+							"raw": "{{base_url}}/products/4",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"products",
-								"1"
+								"4"
 							]
 						},
 						"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
@@ -98,7 +143,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Add your name in the body\"\n}",
+							"raw": "{\n\t\"name\": \"Samsung S25 Ultra 1TB\",\n    \"price\": 28000000,\n    \"oldprice\": 32000000,\n    \"buyturn\": 12,\n    \"quantity\": 18,\n    \"brand_id\": 1,\n    \"category_id\": 2\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -212,10 +257,6 @@
 			"item": [
 				{
 					"name": "Get Categories",
-					"request": {
-						"method": "GET",
-						"url": "{{base_url}}/categories/"
-					},
 					"event": [
 						{
 							"listen": "test",
@@ -223,17 +264,54 @@
 								"exec": [
 									"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
-					]
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/categories?name&page=6&limit=3&includeProducts=true&sort_by&order_type=DESC",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"categories"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": null
+								},
+								{
+									"key": "page",
+									"value": "6"
+								},
+								{
+									"key": "limit",
+									"value": "3"
+								},
+								{
+									"key": "includeProducts",
+									"value": "true"
+								},
+								{
+									"key": "sort_by",
+									"value": null
+								},
+								{
+									"key": "order_type",
+									"value": "DESC"
+								}
+							]
+						}
+					},
+					"response": []
 				},
 				{
 					"name": "Get Category By ID",
-					"request": {
-						"method": "GET",
-						"url": "{{base_url}}/categories/{{id}}"
-					},
 					"event": [
 						{
 							"listen": "test",
@@ -241,26 +319,29 @@
 								"exec": [
 									"pm.test(\"Status code is 200\", function () { pm.response.to.have.status(200); });"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
-					]
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/categories/2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"categories",
+								"2"
+							]
+						}
+					},
+					"response": []
 				},
 				{
 					"name": "Create Category",
-					"request": {
-						"method": "POST",
-						"url": "{{base_url}}/categories/",
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"name\": \"New Category\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						}
-					},
 					"event": [
 						{
 							"listen": "test",
@@ -268,26 +349,38 @@
 								"exec": [
 									"pm.test(\"Successful POST request\", function () { pm.expect(pm.response.code).to.be.oneOf([200, 201]); });"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
-					]
-				},
-				{
-					"name": "Update Category",
+					],
 					"request": {
-						"method": "PUT",
-						"url": "{{base_url}}/categories/{{id}}",
+						"method": "POST",
+						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Updated Category\"\n}",
+							"raw": "{\n\t\"name\": \"Laptop\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
+						},
+						"url": {
+							"raw": "{{base_url}}/categories/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"categories",
+								""
+							]
 						}
 					},
+					"response": []
+				},
+				{
+					"name": "Update Category",
 					"event": [
 						{
 							"listen": "test",
@@ -295,17 +388,38 @@
 								"exec": [
 									"pm.test(\"Successful PUT request\", function () { pm.expect(pm.response.code).to.be.oneOf([200, 204]); });"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
-					]
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Quần áo\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/categories/{{id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"categories",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
 				},
 				{
 					"name": "Delete Category",
-					"request": {
-						"method": "DELETE",
-						"url": "{{base_url}}/categories/{{id}}"
-					},
 					"event": [
 						{
 							"listen": "test",
@@ -316,7 +430,22 @@
 								"type": "text/javascript"
 							}
 						}
-					]
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/categories/{{id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"categories",
+								"{{id}}"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -325,11 +454,6 @@
 			"item": [
 				{
 					"name": "Get Orders",
-					"request": {
-						"method": "GET",
-						"url": "{{base_url}}/orders",
-						"description": "Lấy danh sách đơn hàng"
-					},
 					"event": [
 						{
 							"listen": "test",
@@ -340,15 +464,25 @@
 								"type": "text/javascript"
 							}
 						}
-					]
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/orders",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"orders"
+							]
+						},
+						"description": "Lấy danh sách đơn hàng"
+					},
+					"response": []
 				},
 				{
 					"name": "Get Order By ID",
-					"request": {
-						"method": "GET",
-						"url": "{{base_url}}/orders/1",
-						"description": "Lấy thông tin đơn hàng theo ID"
-					},
 					"event": [
 						{
 							"listen": "test",
@@ -359,12 +493,40 @@
 								"type": "text/javascript"
 							}
 						}
-					]
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/orders/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"orders",
+								"1"
+							]
+						},
+						"description": "Lấy thông tin đơn hàng theo ID"
+					},
+					"response": []
 				},
 				{
 					"name": "Create Order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.response.to.have.status(201);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
+						"header": [],
 						"body": {
 							"mode": "raw",
 							"raw": "{\n\t\"customerName\": \"Nguyen Van A\",\n\t\"totalAmount\": 200000\n}",
@@ -374,25 +536,35 @@
 								}
 							}
 						},
-						"url": "{{base_url}}/orders",
+						"url": {
+							"raw": "{{base_url}}/orders",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"orders"
+							]
+						},
 						"description": "Tạo đơn hàng mới"
 					},
+					"response": []
+				},
+				{
+					"name": "Update Order",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.response.to.have.status(201);"
+									"pm.response.to.have.status(200);"
 								],
 								"type": "text/javascript"
 							}
 						}
-					]
-				},
-				{
-					"name": "Update Order",
+					],
 					"request": {
 						"method": "PUT",
+						"header": [],
 						"body": {
 							"mode": "raw",
 							"raw": "{\n\t\"customerName\": \"Nguyen Van B\",\n\t\"totalAmount\": 250000\n}",
@@ -402,28 +574,22 @@
 								}
 							}
 						},
-						"url": "{{base_url}}/orders/1",
+						"url": {
+							"raw": "{{base_url}}/orders/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"orders",
+								"1"
+							]
+						},
 						"description": "Cập nhật đơn hàng"
 					},
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.response.to.have.status(200);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					]
+					"response": []
 				},
 				{
 					"name": "Delete Order",
-					"request": {
-						"method": "DELETE",
-						"url": "{{base_url}}/orders/1",
-						"description": "Xóa đơn hàng"
-					},
 					"event": [
 						{
 							"listen": "test",
@@ -434,7 +600,23 @@
 								"type": "text/javascript"
 							}
 						}
-					]
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/orders/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"orders",
+								"1"
+							]
+						},
+						"description": "Xóa đơn hàng"
+					},
+					"response": []
 				}
 			]
 		},
@@ -443,11 +625,6 @@
 			"item": [
 				{
 					"name": "Get Order Details",
-					"request": {
-						"method": "GET",
-						"url": "{{base_url}}/order-details",
-						"description": "Lấy danh sách chi tiết đơn hàng"
-					},
 					"event": [
 						{
 							"listen": "test",
@@ -458,15 +635,25 @@
 								"type": "text/javascript"
 							}
 						}
-					]
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/order-details",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"order-details"
+							]
+						},
+						"description": "Lấy danh sách chi tiết đơn hàng"
+					},
+					"response": []
 				},
 				{
 					"name": "Get Order Detail By ID",
-					"request": {
-						"method": "GET",
-						"url": "{{base_url}}/order-details/1",
-						"description": "Lấy thông tin chi tiết đơn hàng theo ID"
-					},
 					"event": [
 						{
 							"listen": "test",
@@ -477,12 +664,40 @@
 								"type": "text/javascript"
 							}
 						}
-					]
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/order-details/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"order-details",
+								"1"
+							]
+						},
+						"description": "Lấy thông tin chi tiết đơn hàng theo ID"
+					},
+					"response": []
 				},
 				{
 					"name": "Create Order Detail",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.response.to.have.status(201);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
+						"header": [],
 						"body": {
 							"mode": "raw",
 							"raw": "{\n\t\"orderId\": 1,\n\t\"productId\": 2,\n\t\"quantity\": 3,\n\t\"price\": 50000\n}",
@@ -492,25 +707,35 @@
 								}
 							}
 						},
-						"url": "{{base_url}}/order-details",
+						"url": {
+							"raw": "{{base_url}}/order-details",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"order-details"
+							]
+						},
 						"description": "Tạo chi tiết đơn hàng mới"
 					},
+					"response": []
+				},
+				{
+					"name": "Update Order Detail",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.response.to.have.status(201);"
+									"pm.response.to.have.status(200);"
 								],
 								"type": "text/javascript"
 							}
 						}
-					]
-				},
-				{
-					"name": "Update Order Detail",
+					],
 					"request": {
 						"method": "PUT",
+						"header": [],
 						"body": {
 							"mode": "raw",
 							"raw": "{\n\t\"quantity\": 5,\n\t\"price\": 45000\n}",
@@ -520,28 +745,22 @@
 								}
 							}
 						},
-						"url": "{{base_url}}/order-details/1",
+						"url": {
+							"raw": "{{base_url}}/order-details/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"order-details",
+								"1"
+							]
+						},
 						"description": "Cập nhật chi tiết đơn hàng"
 					},
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.response.to.have.status(200);"
-								],
-								"type": "text/javascript"
-							}
-						}
-					]
+					"response": []
 				},
 				{
 					"name": "Delete Order Detail",
-					"request": {
-						"method": "DELETE",
-						"url": "{{base_url}}/order-details/1",
-						"description": "Xóa chi tiết đơn hàng"
-					},
 					"event": [
 						{
 							"listen": "test",
@@ -552,7 +771,23 @@
 								"type": "text/javascript"
 							}
 						}
-					]
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/order-details/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"order-details",
+								"1"
+							]
+						},
+						"description": "Xóa chi tiết đơn hàng"
+					},
+					"response": []
 				}
 			]
 		},
@@ -561,11 +796,6 @@
 			"item": [
 				{
 					"name": "Get Brands",
-					"request": {
-						"method": "GET",
-						"url": "{{base_url}}/brands",
-						"description": "Lấy danh sách thương hiệu"
-					},
 					"event": [
 						{
 							"listen": "test",
@@ -573,18 +803,55 @@
 								"exec": [
 									"pm.response.to.have.status(200);"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
-					]
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/brands?name&page=2&limit=4&includeProducts=true&sort_by&order_type=DESC",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"brands"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": null
+								},
+								{
+									"key": "page",
+									"value": "2"
+								},
+								{
+									"key": "limit",
+									"value": "4"
+								},
+								{
+									"key": "includeProducts",
+									"value": "true"
+								},
+								{
+									"key": "sort_by",
+									"value": null
+								},
+								{
+									"key": "order_type",
+									"value": "DESC"
+								}
+							]
+						},
+						"description": "Lấy danh sách thương hiệu"
+					},
+					"response": []
 				},
 				{
 					"name": "Get Brand By ID",
-					"request": {
-						"method": "GET",
-						"url": "{{base_url}}/brands/1",
-						"description": "Lấy thông tin thương hiệu theo ID"
-					},
 					"event": [
 						{
 							"listen": "test",
@@ -592,27 +859,40 @@
 								"exec": [
 									"pm.response.to.have.status(200);"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
-					]
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/brands/3",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"brands",
+								"3"
+							]
+						},
+						"description": "Lấy thông tin thương hiệu theo ID"
+					},
+					"response": []
 				},
 				{
 					"name": "Create Brand",
-					"request": {
-						"method": "POST",
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Nike\",\n\t\"description\": \"Thương hiệu thời trang thể thao nổi tiếng\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "{{base_url}}/brands",
-						"description": "Tạo thương hiệu mới"
-					},
 					"event": [
 						{
 							"listen": "test",
@@ -620,27 +900,38 @@
 								"exec": [
 									"pm.response.to.have.status(201);"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
-					]
-				},
-				{
-					"name": "Update Brand",
+					],
 					"request": {
-						"method": "PUT",
+						"method": "POST",
+						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Nike Updated\",\n\t\"description\": \"Cập nhật mô tả thương hiệu\"\n}",
+							"raw": "{\n\t\"name\": \"Michelin\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "{{base_url}}/brands/1",
-						"description": "Cập nhật thương hiệu"
+						"url": {
+							"raw": "{{base_url}}/brands",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"brands"
+							]
+						},
+						"description": "Tạo thương hiệu mới"
 					},
+					"response": []
+				},
+				{
+					"name": "Update Brand",
 					"event": [
 						{
 							"listen": "test",
@@ -648,18 +939,39 @@
 								"exec": [
 									"pm.response.to.have.status(200);"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
-					]
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"ASUS\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/brands/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"brands",
+								"1"
+							]
+						},
+						"description": "Cập nhật thương hiệu"
+					},
+					"response": []
 				},
 				{
 					"name": "Delete Brand",
-					"request": {
-						"method": "DELETE",
-						"url": "{{base_url}}/brands/1",
-						"description": "Xóa thương hiệu"
-					},
 					"event": [
 						{
 							"listen": "test",
@@ -670,7 +982,23 @@
 								"type": "text/javascript"
 							}
 						}
-					]
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/brands/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"brands",
+								"1"
+							]
+						},
+						"description": "Xóa thương hiệu"
+					},
+					"response": []
 				}
 			]
 		}
